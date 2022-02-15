@@ -2,13 +2,7 @@ set :pty, true
 
 set :hass_config_path, "#{fetch(:deploy_to)}/config"
 
-set :managed_config_files, %w[
-  automations.yaml
-  configuration.yaml
-  groups.yaml
-  scenes.yaml
-  scripts.yaml
-]
+set :managed_config_files, %x[git ls-files *.yaml].lines.map(&:strip)
 
 server "synology-a9e3", user: "synologyadmin", roles: %w[hass], ssh_options: {
   forward_agent: true,
