@@ -24,3 +24,35 @@
     entity_id: switch.master_bathroom_exhaust_fan
     domain: switch
   mode: restart
+
+- id: turn_on_master_bedroom_closet_lights_d88e4d88
+  alias: Turn on Master Bedroom Closet lights
+  trigger:
+  - type: opened
+    platform: device
+    device_id: 2e2832a09a9845331491d0ad85f97f68
+    entity_id: binary_sensor.master_bedroom_closet_door_sensor
+    domain: binary_sensor
+  condition: []
+  action:
+    - type: turn_on
+      device_id: 2e2832a09a9845331491d0ad85f97f68
+      entity_id: light.master_bedroom_closet_light
+      domain: light
+  mode: single
+
+- id: turn_off_master_bedroom_closet_lights_1094ceb2
+  alias: Turn off Master Bedroom Closet lights
+  trigger:
+  - type: not_opened
+    platform: device
+    device_id: 2e2832a09a9845331491d0ad85f97f68
+    entity_id: binary_sensor.master_bedroom_closet_door_sensor
+    domain: binary_sensor
+  condition: []
+  action:
+    - type: turn_off
+      device_id: 2e2832a09a9845331491d0ad85f97f68
+      entity_id: light.master_bedroom_closet_light
+      domain: light
+  mode: single
