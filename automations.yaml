@@ -26,7 +26,7 @@
   mode: restart
 
 - id: turn_on_master_bedroom_closet_lights_d88e4d88
-  alias: Turn on Master Bedroom Closet lights
+  alias: Turn on Master Bedroom Closet lights when Door Opened
   trigger:
   - type: opened
     platform: device
@@ -42,7 +42,7 @@
   mode: single
 
 - id: turn_off_master_bedroom_closet_lights_1094ceb2
-  alias: Turn off Master Bedroom Closet lights
+  alias: Turn off Master Bedroom Closet lights when Door Closed
   trigger:
   - type: not_opened
     platform: device
@@ -52,6 +52,26 @@
   condition: []
   action:
     - type: turn_off
+      device_id: 2e2832a09a9845331491d0ad85f97f68
+      entity_id: light.master_bedroom_closet_light
+      domain: light
+  mode: single
+
+- id: turn_off_master_bedroom_closet_lights_1b3f7f25
+  alias: Turn off Master Bedroom Closet lights after 5 minutes
+  trigger:
+    - platform: state
+      device_id: 2e2832a09a9845331491d0ad85f97f68
+      entity_id: light.master_bedroom_closet_light
+      to: "on"
+  condition: []
+  action:
+    - delay:
+        hours: 0
+        minutes: 5
+        seconds: 0
+        milliseconds: 0
+    - type: turn_ff
       device_id: 2e2832a09a9845331491d0ad85f97f68
       entity_id: light.master_bedroom_closet_light
       domain: light
