@@ -1,3 +1,4 @@
+---
 # Configure a default setup of Home Assistant (frontend, api, etc)
 default_config:
 
@@ -27,7 +28,8 @@ http:
     - 192.168.1.10
 
 nest:
-  client_id: 308745043070-6n8jqq3ik40jqvva5v2h6k00ikvjl5pk.apps.googleusercontent.com
+  client_id: >-
+    308745043070-6n8jqq3ik40jqvva5v2h6k00ikvjl5pk.apps.googleusercontent.com
   client_secret: !secret nest_client_secret
   project_id: e22f54f1-45ef-4596-9858-ffaa8129fa94
   subscriber_id: projects/home-assistant-334403/subscriptions/home

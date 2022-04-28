@@ -1,22 +1,31 @@
 ---
 name: Home Assistant
-on:
-  push:
-  schedule:
-    - cron: "0 6 * * 0"
+on: [push]
 jobs:
-  check_config:
-    name: Core Configuration Check
+  lint:
+    name: YAML Lint
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        tag: [stable, beta, dev]
     steps:
       - name: Check out configuration from GitHub
         uses: actions/checkout@v2
-      - name: Run Home Assistant Configuration Check
-        uses: frenck/action-home-assistant@v1
+      - name: YAML Lint
+        uses: ibiqlik/action-yamllint@v3
         with:
-          path: "./"
-          secrets: secrets.test.yaml
-          version: ${{ matrix.tag }}
+          file_or_dir: "."
+  format:
+    name: YAML Formatting
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out configuration from GitHub
+        uses: actions/checkout@v2
+        with:
+          ref: ${{ github.head_ref }}
+      - name: Format YAML files
+        uses: creyD/prettier_action@v4.2
+        with:
+          prettier_options: "--write ./**/*.{yaml,yml}"
+          commit_message: "Format YAML code"
+          commit_description: >
+            Performed by GitHub Actions
+            action: creyD/prettier_action
+            definition: .github/workflows/ci.yml
