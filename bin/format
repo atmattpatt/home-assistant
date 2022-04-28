@@ -3,4 +3,4 @@
 set -e
 set -o pipefail
 
-exec prettier --write "$@" ./**/*.yaml
+exec prettier --write "$@" ./**/*.{yaml,yml}

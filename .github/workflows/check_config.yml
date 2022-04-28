@@ -1,6 +1,6 @@
 ---
 name: Home Assistant
-on:  # yamllint disable-line rule:truthy
+on:
   push:
   schedule:
     - cron: "0 6 * * 0"
