@@ -62,7 +62,6 @@
   alias: Turn off Master Bedroom Closet lights after 5 minutes
   trigger:
     - platform: state
-      device_id: 2e2832a09a9845331491d0ad85f97f68
       entity_id: light.master_bedroom_closet_light
       to: "on"
   condition: []
