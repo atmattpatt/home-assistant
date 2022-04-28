@@ -56,3 +56,21 @@
       entity_id: light.master_bedroom_closet_light
       domain: light
   mode: single
+
+- id: update_openuv_data_e07a4339
+  alias: Update OpenUV data
+  trigger:
+  - platform: time_pattern
+    minutes: "/30"
+  condition:
+  - condition: and
+    conditions:
+    - condition: sun
+      after: sunrise
+      after_offset: '1:00:00'
+    - condition: sun
+      before: sunset
+      before_offset: '1:00:00'
+  action:
+  - service: openuv.update_data
+  mode: single
