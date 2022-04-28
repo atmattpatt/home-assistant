@@ -1,3 +1,4 @@
+---
 - id: turn_off_master_bathroom_exhaust_fan_811ad634
   alias: Turn off Master Bathroom Exhaust Fan after 20 minutes
   trigger:
