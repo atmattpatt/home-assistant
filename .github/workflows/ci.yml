@@ -1,9 +1,6 @@
 ---
 name: Home Assistant
-on:  # yamllint disable-line rule:truthy
-  push:
-  schedule:
-    - cron: "0 6 * * 0"
+on: [push]  # yamllint disable-line rule:truthy
 jobs:
   lint:
     name: YAML Lint
@@ -15,18 +12,15 @@ jobs:
         uses: ibiqlik/action-yamllint@v3
         with:
           file_or_dir: "."
-  check_config:
-    name: Core Configuration Check
+  format:
+    name: YAML Formatting
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        tag: [stable, beta, dev]
     steps:
       - name: Check out configuration from GitHub
         uses: actions/checkout@v2
-      - name: Run Home Assistant Configuration Check
-        uses: frenck/action-home-assistant@v1
         with:
-          path: "./"
-          secrets: secrets.test.yaml
-          version: ${{ matrix.tag }}
+          ref: ${{ github.head_ref }}
+      - name: Format YAML files
+        uses: creyD/prettier_action@v4.2
+        with:
+          prettier_options: "--write ./**/*.yaml"
