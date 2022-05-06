@@ -1,0 +1,27 @@
+---
+- id: turn_off_master_bathroom_exhaust_fan_811ad634
+  alias: Turn off Master Bathroom Exhaust Fan after 20 minutes
+  trigger:
+    - platform: state
+      entity_id: switch.master_bathroom_shower_lights
+      to: "off"
+  condition:
+    - condition: state
+      entity_id: switch.master_bathroom_exhaust_fan
+      state: "on"
+  action:
+    - service: tts.google_translate_say
+      data:
+        entity_id: media_player.nestmini2857
+        message: "The exhaust fan will turn off in 20 minutes"
+        cache: true
+    - delay:
+        hours: 0
+        minutes: 20
+        seconds: 0
+        milliseconds: 0
+    - type: turn_off
+      device_id: 9f0dd6746f96ab7258b9858534129788
+      entity_id: switch.master_bathroom_exhaust_fan
+      domain: switch
+  mode: restart
