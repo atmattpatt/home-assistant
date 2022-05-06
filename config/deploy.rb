@@ -7,6 +7,7 @@ set :repo_url, "git@github.com:atmattpatt/hass"
 ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 set :deploy_to, "/volume1/docker/homeassistant"
+set :tmp_dir, "/volume1/docker/homeassistant/tmp/capistrano"
 
 # Default value for :linked_files is []
 # append :linked_files, "config/database.yml"
