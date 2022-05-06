@@ -2,7 +2,7 @@ set :pty, true
 
 set :hass_config_path, "#{fetch(:deploy_to)}/config"
 
-set :managed_config_files, %x[git ls-files *.yaml].lines.map(&:strip)
+set :managed_config_files, %x[git ls-files **/*.yaml].lines.map(&:strip)
 
 server "synology-a9e3", user: "synologyadmin", roles: %w[hass], ssh_options: {
   forward_agent: true,
@@ -16,7 +16,15 @@ task :ask_password do
 end
 
 task :copy_config_files do
+  directories = fetch(:managed_config_files).map do |config_file|
+    File.dirname(config_file)
+  end.uniq
+
   on roles(:hass) do
+    directories.each do |directory|
+      execute "mkdir -p #{fetch(:hass_config_path)}/#{directory}"
+    end
+
     fetch(:managed_config_files).each do |filename|
       execute "cp -f #{current_path}/#{filename} #{fetch(:hass_config_path)}/#{filename}"
     end
