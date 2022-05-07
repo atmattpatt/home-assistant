@@ -1,0 +1,51 @@
+---
+- id: turn_on_hall_closet_lights_2bbd9ff6
+  alias: Turn on Hall Closet lights when Door Opened
+  trigger:
+    - type: opened
+      platform: device
+      device_id: b5c1601aef2e9bcfdc7c9cb09603b4b1
+      entity_id: binary_sensor.hall_closet_door_sensor
+      domain: binary_sensor
+  condition: []
+  action:
+    - type: turn_on
+      device_id: 755f6de8011b81d79cc584f8d456dffc
+      entity_id: switch.hall_closet_main_lights
+      domain: switch
+  mode: single
+
+- id: turn_off_hall_closet_lights_f104db5e
+  alias: Turn off Hall Closet lights when Door Closed
+  trigger:
+    - type: not_opened
+      platform: device
+      device_id: b5c1601aef2e9bcfdc7c9cb09603b4b1
+      entity_id: binary_sensor.hall_closet_door_sensor
+      domain: binary_sensor
+  condition: []
+  action:
+    - type: turn_off
+      device_id: 755f6de8011b81d79cc584f8d456dffc
+      entity_id: switch.hall_closet_main_lights
+      domain: switch
+  mode: single
+
+- id: turn_off_hall_closet_lights_39211f55
+  alias: Turn off Hall Closet lights after 5 minutes
+  trigger:
+    - platform: state
+      entity_id: switch.hall_closet_main_lights
+      to: "on"
+  condition: []
+  action:
+    - delay:
+        hours: 0
+        minutes: 5
+        seconds: 0
+        milliseconds: 0
+    - type: turn_off
+      device_id: 755f6de8011b81d79cc584f8d456dffc
+      entity_id: switch.hall_closet_main_lights
+      domain: switch
+  mode: restart
