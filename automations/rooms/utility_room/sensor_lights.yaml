@@ -1,0 +1,51 @@
+---
+- id: turn_on_utility_room_lights_b14d3536
+  alias: Turn on Utility Room lights when Door Opened
+  trigger:
+    - type: opened
+      platform: device
+      device_id: cb67d6f7002e18aa9ad5771b162c6d8e
+      entity_id: binary_sensor.utility_room_door_sensor
+      domain: binary_sensor
+  condition: []
+  action:
+    - type: turn_on
+      device_id: 8ab8e0011dba0b61c4f8d905565696ce
+      entity_id: switch.utility_room_main_lights
+      domain: switch
+  mode: single
+
+- id: turn_off_utility_room_lights_820cd680
+  alias: Turn off Utility Room lights when Door Closed
+  trigger:
+    - type: not_opened
+      platform: device
+      device_id: cb67d6f7002e18aa9ad5771b162c6d8e
+      entity_id: binary_sensor.utility_room_door_sensor
+      domain: binary_sensor
+  condition: []
+  action:
+    - type: turn_off
+      device_id: 8ab8e0011dba0b61c4f8d905565696ce
+      entity_id: switch.utility_room_main_lights
+      domain: switch
+  mode: single
+
+- id: turn_off_utility_room_lights_c049a9db
+  alias: Turn off Utility Room lights after 5 minutes
+  trigger:
+    - platform: state
+      entity_id: switch.utility_room_main_lights
+      to: "on"
+  condition: []
+  action:
+    - delay:
+        hours: 0
+        minutes: 5
+        seconds: 0
+        milliseconds: 0
+    - type: turn_off
+      device_id: 8ab8e0011dba0b61c4f8d905565696ce
+      entity_id: switch.utility_room_main_lights
+      domain: switch
+  mode: restart
