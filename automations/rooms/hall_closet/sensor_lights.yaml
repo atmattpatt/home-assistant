@@ -1,5 +1,5 @@
 ---
-- id: turn_on_hall_closet_lights_2bbd9ff6
+- id: turn_on_hall_closet_lights_e47d312e
   alias: Turn on Hall Closet lights when Door Opened
   trigger:
     - type: opened
@@ -15,7 +15,7 @@
       domain: switch
   mode: single
 
-- id: turn_off_hall_closet_lights_f104db5e
+- id: turn_off_hall_closet_lights_16ae92e6
   alias: Turn off Hall Closet lights when Door Closed
   trigger:
     - type: not_opened
@@ -31,7 +31,7 @@
       domain: switch
   mode: single
 
-- id: turn_off_hall_closet_lights_39211f55
+- id: turn_off_hall_closet_lights_87b2187b
   alias: Turn off Hall Closet lights after 5 minutes
   trigger:
     - platform: state
