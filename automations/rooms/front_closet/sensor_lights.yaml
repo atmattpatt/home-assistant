@@ -10,6 +10,7 @@
   condition: []
   action:
     - type: turn_on
+      device_id: 5cda0a23b069837548a5502301dc66d6
       entity_id: light.front_closet_main_lights
       domain: light
   mode: single
@@ -25,6 +26,7 @@
   condition: []
   action:
     - type: turn_off
+      device_id: 5cda0a23b069837548a5502301dc66d6
       entity_id: light.front_closet_main_lights
       domain: light
   mode: single
@@ -43,6 +45,7 @@
         seconds: 0
         milliseconds: 0
     - type: turn_off
+      device_id: 5cda0a23b069837548a5502301dc66d6
       entity_id: light.front_closet_main_lights
       domain: light
   mode: restart
