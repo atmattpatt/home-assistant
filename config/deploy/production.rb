@@ -41,13 +41,13 @@ end
 namespace :hass do
   task :check_config do
     on roles(:hass) do
-      sudo "/usr/local/bin/docker exec homeassistant hass --config /config --script check_config --secrets"
+      sudo "/usr/local/bin/docker exec home-assistant hass --config /config --script check_config --secrets"
     end
   end
 
   task :restart do
     on roles(:hass), in: :sequence do
-      sudo "/usr/local/bin/docker restart homeassistant"
+      sudo "/usr/local/bin/docker restart home-assistant"
     end
   end
 end
