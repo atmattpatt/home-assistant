@@ -1,0 +1,24 @@
+---
+front_closet_lights:
+  duration: "00:05:00"
+
+guest_bedroom_closet_lights:
+  duration: "00:05:00"
+
+hall_closet_lights:
+  duration: "00:05:00"
+
+laundry_room_lights:
+  duration: "00:05:00"
+
+master_bathroom_exhaust_fan:
+  duration: "00:20:00"
+
+master_bedroom_closet_lights:
+  duration: "00:05:00"
+
+office_closet_lights:
+  duration: "00:05:00"
+
+utility_room_lights:
+  duration: "00:05:00"

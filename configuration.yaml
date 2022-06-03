@@ -25,6 +25,7 @@ automation managed: !include_dir_merge_list automations/
 automation unamanged: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+timer: !include timers.yaml
 
 light groups: !include light-groups.yaml
 
