@@ -18,6 +18,7 @@ recorder:
 # Text to speech
 tts:
   - platform: google_translate
+    base_url: http://192.168.1.10:8123
 
 input_boolean: !include inputs/boolean.yaml
 group: !include groups.yaml
