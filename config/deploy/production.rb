@@ -16,6 +16,13 @@ task :ask_password do
   end
 end
 
+task :show_config_files do
+  puts "\u001b[32;1mWill deploy config files:\u001b[0m"
+  fetch(:managed_config_files).each do |filename|
+    puts "  + #{filename}"
+  end
+end
+
 task :copy_config_files do
   directories = fetch(:managed_config_files).map do |config_file|
     File.dirname(config_file)
