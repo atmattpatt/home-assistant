@@ -13,6 +13,9 @@
       device_id: 2e2832a09a9845331491d0ad85f97f68
       entity_id: light.master_bedroom_closet_light
       domain: light
+    - service: timer.start
+      target:
+        entity_id: timer.master_bedroom_closet_lights
   mode: single
 
 - id: turn_off_master_bedroom_closet_lights_1094ceb2
