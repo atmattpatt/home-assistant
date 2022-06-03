@@ -37,16 +37,15 @@
 - id: turn_off_master_bedroom_closet_lights_1b3f7f25
   alias: Turn off Master Bedroom Closet lights after 5 minutes
   trigger:
-    - platform: state
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.master_bedroom_closet_lights
+  condition:
+    - condition: state
       entity_id: light.master_bedroom_closet_light
-      to: "on"
-  condition: []
+      state: "on"
   action:
-    - delay:
-        hours: 0
-        minutes: 5
-        seconds: 0
-        milliseconds: 0
     - type: turn_off
       device_id: 2e2832a09a9845331491d0ad85f97f68
       entity_id: light.master_bedroom_closet_light
