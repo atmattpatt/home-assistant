@@ -13,6 +13,9 @@
       device_id: 755f6de8011b81d79cc584f8d456dffc
       entity_id: switch.hall_closet_main_lights
       domain: switch
+    - service: timer.start
+      target:
+        entity_id: timer.hall_closet_lights
   mode: single
 
 - id: turn_off_hall_closet_lights_16ae92e6
@@ -29,23 +32,25 @@
       device_id: 755f6de8011b81d79cc584f8d456dffc
       entity_id: switch.hall_closet_main_lights
       domain: switch
+    - service: timer.cancel
+      target:
+        entity_id: timer.hall_closet_lights
   mode: single
 
 - id: turn_off_hall_closet_lights_87b2187b
   alias: Turn off Hall Closet lights after 5 minutes
   trigger:
-    - platform: state
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.hall_closet_lights
+  condition:
+    - condition: state
       entity_id: switch.hall_closet_main_lights
-      to: "on"
-  condition: []
+      state: "on"
   action:
-    - delay:
-        hours: 0
-        minutes: 5
-        seconds: 0
-        milliseconds: 0
     - type: turn_off
       device_id: 755f6de8011b81d79cc584f8d456dffc
       entity_id: switch.hall_closet_main_lights
       domain: switch
-  mode: restart
+  mode: single

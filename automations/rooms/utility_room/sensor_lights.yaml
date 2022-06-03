@@ -13,6 +13,9 @@
       device_id: 8ab8e0011dba0b61c4f8d905565696ce
       entity_id: switch.utility_room_main_lights
       domain: switch
+    - service: timer.start
+      target:
+        entity_id: timer.utility_room_lights
   mode: single
 
 - id: turn_off_utility_room_lights_820cd680
@@ -29,23 +32,25 @@
       device_id: 8ab8e0011dba0b61c4f8d905565696ce
       entity_id: switch.utility_room_main_lights
       domain: switch
+    - service: timer.cancel
+      target:
+        entity_id: timer.utility_room_lights
   mode: single
 
 - id: turn_off_utility_room_lights_c049a9db
   alias: Turn off Utility Room lights after 5 minutes
   trigger:
-    - platform: state
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.utility_room_lights
+  condition:
+    - condition: state
       entity_id: switch.utility_room_main_lights
-      to: "on"
-  condition: []
+      state: "on"
   action:
-    - delay:
-        hours: 0
-        minutes: 5
-        seconds: 0
-        milliseconds: 0
     - type: turn_off
       device_id: 8ab8e0011dba0b61c4f8d905565696ce
       entity_id: switch.utility_room_main_lights
       domain: switch
-  mode: restart
+  mode: single
