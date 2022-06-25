@@ -1,0 +1,6 @@
+---
+- sensor:
+    - name: "OpenWeatherMap Wind speed (knots)"
+      unit_of_measurement: kt
+      state: >
+        {{ (float(states.sensor.openweathermap_wind_speed.state) * 1.94384) | round(1) }}
