@@ -11,8 +11,8 @@
   action:
     - type: turn_on
       device_id: d21bde71226b802326ef585c5cf05a89
-      entity_id: switch.laundry_room_main_lights
-      domain: switch
+      entity_id: light.laundry_room_main_lights
+      domain: light
     - service: timer.start
       target:
         entity_id: timer.laundry_room_lights
@@ -30,8 +30,8 @@
   action:
     - type: turn_off
       device_id: d21bde71226b802326ef585c5cf05a89
-      entity_id: switch.laundry_room_main_lights
-      domain: switch
+      entity_id: light.laundry_room_main_lights
+      domain: light
     - service: timer.cancel
       target:
         entity_id: timer.laundry_room_lights
@@ -46,11 +46,11 @@
         entity_id: timer.laundry_room_lights
   condition:
     - condition: state
-      entity_id: switch.laundry_room_main_lights
+      entity_id: light.laundry_room_main_lights
       state: "on"
   action:
     - type: turn_off
       device_id: d21bde71226b802326ef585c5cf05a89
-      entity_id: switch.laundry_room_main_lights
-      domain: switch
+      entity_id: light.laundry_room_main_lights
+      domain: light
   mode: single
