@@ -2,4 +2,4 @@
 - name: "Dyson Vacuum Charging"
   platform: threshold
   entity_id: sensor.dyson_vacuum_test_current
-  lower: 0.2 # amps
+  upper: 0.2 # amps
