@@ -1,0 +1,19 @@
+---
+- id: turn_off_dyson_vacuum_charger_7ea23867
+  alias: Turn off Dyson Vacuum charging when charging stops
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - binary_sensor.dyson_vacuum_charging
+      to: "off"
+      for:
+        hours: 0
+        minutes: 5
+        seconds: 0
+  condition: []
+  action:
+    - service: switch.turn_off
+      data: {}
+      target:
+        entity_id: switch.dyson_vacuum_test
