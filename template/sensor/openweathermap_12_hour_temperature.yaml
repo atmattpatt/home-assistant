@@ -1,0 +1,21 @@
+---
+- sensor:
+    - name: "OpenWeatherMap 12 Hour Max Forecast Temperature"
+      unit_of_measurement: "°F"
+      state: >
+        {%- set data = namespace(temp_12h=[]) -%}
+        {%- set forecast = state_attr("weather.openweathermap", "forecast") -%}
+        {%- for i in range(0, min(12, forecast | length)) -%}
+          {%- set data.temp_12h = data.temp_12h + [forecast[i]["temperature"]] -%}
+        {%- endfor -%}
+        {{ data.temp_12h | max }}
+
+    - name: "OpenWeatherMap 12 Hour Min Forecast Temperature"
+      unit_of_measurement: "°F"
+      state: >
+        {%- set data = namespace(temp_12h=[]) -%}
+        {%- set forecast = state_attr("weather.openweathermap", "forecast") -%}
+        {%- for i in range(0, min(12, forecast | length)) -%}
+          {%- set data.temp_12h = data.temp_12h + [forecast[i]["temperature"]] -%}
+        {%- endfor -%}
+        {{ data.temp_12h | min }}

@@ -1,0 +1,11 @@
+---
+- sensor:
+    - name: "HVAC Desired Operating Mode"
+      state: >
+        {%- if states("sensor.openweathermap_12_hour_min_forecast_temperature") | float > 60 -%}
+        cool
+        {%- elif states("sensor.openweathermap_12_hour_max_forecast_temperature") | float < 60 -%}
+        heat
+        {%- else -%}
+        heat_cool
+        {%- endif -%}
