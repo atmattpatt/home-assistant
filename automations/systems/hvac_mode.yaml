@@ -14,6 +14,11 @@
           entity_id: climate.thermostat_default_zone
           state: "off"
   action:
+    - device_id: aac434085c0b0d42b53f850c49d27fc7
+      domain: climate
+      entity_id: climate.thermostat_default_zone
+      type: set_hvac_mode
+      hvac_mode: cool
     - service: climate.set_temperature
       data:
         temperature: 74
@@ -44,6 +49,11 @@
           entity_id: climate.thermostat_default_zone
           state: "off"
   action:
+    - device_id: aac434085c0b0d42b53f850c49d27fc7
+      domain: climate
+      entity_id: climate.thermostat_default_zone
+      type: set_hvac_mode
+      hvac_mode: heat
     - service: climate.set_temperature
       data:
         temperature: 72
@@ -74,6 +84,11 @@
           entity_id: climate.thermostat_default_zone
           state: "off"
   action:
+    - device_id: aac434085c0b0d42b53f850c49d27fc7
+      domain: climate
+      entity_id: climate.thermostat_default_zone
+      type: set_hvac_mode
+      hvac_mode: auto
     - service: climate.set_temperature
       data:
         target_temp_high: 74
