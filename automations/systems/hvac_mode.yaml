@@ -7,7 +7,12 @@
       entity_id:
         - sensor.hvac_desired_operating_mode
       to: cool
-  condition: []
+  condition:
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: climate.thermostat_default_zone
+          state: "off"
   action:
     - service: climate.set_temperature
       data:
@@ -32,7 +37,12 @@
       entity_id:
         - sensor.hvac_desired_operating_mode
       to: heat
-  condition: []
+  condition:
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: climate.thermostat_default_zone
+          state: "off"
   action:
     - service: climate.set_temperature
       data:
@@ -57,13 +67,18 @@
       entity_id:
         - sensor.hvac_desired_operating_mode
       to: heat_cool
-  condition: []
+  condition:
+    - condition: not
+      conditions:
+        - condition: state
+          entity_id: climate.thermostat_default_zone
+          state: "off"
   action:
     - service: climate.set_temperature
       data:
         target_temp_high: 74
         target_temp_low: 71
-        hvac_mode: heat_cool
+        hvac_mode: auto
       target:
         entity_id: climate.thermostat_default_zone
     - service: notify.pushover
