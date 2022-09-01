@@ -1,0 +1,76 @@
+---
+- id: set_hvac_mode_cool_b6a6212b
+  alias: Set HVAC to cool mode
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.hvac_desired_operating_mode
+      to: cool
+  condition: []
+  action:
+    - service: climate.set_temperature
+      data:
+        temperature: 74
+        hvac_mode: cool
+      target:
+        entity_id: climate.thermostat_default_zone
+    - service: notify.pushover
+      data:
+        message: >-
+          The thermostat has been changed to cool to 74°F based
+          on the 12-hour forecast temperature.
+        title: Therostat changed to cool mode
+        data:
+          priority: -1
+
+- id: set_hvac_mode_heat_5bc2fc24
+  alias: Set HVAC to heat mode
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.hvac_desired_operating_mode
+      to: heat
+  condition: []
+  action:
+    - service: climate.set_temperature
+      data:
+        temperature: 72
+        hvac_mode: heat
+      target:
+        entity_id: climate.thermostat_default_zone
+    - service: notify.pushover
+      data:
+        message: >-
+          The thermostat has been changed to heat to 72°F based
+          on the 12-hour forecast temperature.
+        title: Therostat changed to heat mode
+        data:
+          priority: -1
+
+- id: set_hvac_mode_heat_cool_0a107423
+  alias: Set HVAC to heat/cool mode
+  mode: single
+  trigger:
+    - platform: state
+      entity_id:
+        - sensor.hvac_desired_operating_mode
+      to: heat_cool
+  condition: []
+  action:
+    - service: climate.set_temperature
+      data:
+        target_temp_high: 74
+        target_temp_low: 71
+        hvac_mode: heat_cool
+      target:
+        entity_id: climate.thermostat_default_zone
+    - service: notify.pushover
+      data:
+        message: >-
+          The thermostat has been changed to heat to 71°F and cool to 74°F based
+          on the 12-hour forecast temperature.
+        title: Therostat changed to heat/cool mode
+        data:
+          priority: -1
