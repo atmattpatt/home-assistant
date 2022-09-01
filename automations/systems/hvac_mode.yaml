@@ -19,15 +19,10 @@
       entity_id: climate.thermostat_default_zone
       type: set_hvac_mode
       hvac_mode: cool
-    - service: climate.set_temperature
-      data:
-        temperature: 74
-      target:
-        device_id: aac434085c0b0d42b53f850c49d27fc7
     - service: notify.pushover
       data:
         message: >-
-          The thermostat has been changed to cool to 74°F based
+          The thermostat has been changed to cool mode based
           on the 12-hour forecast temperature.
         title: Therostat changed to cool mode
         data:
@@ -53,15 +48,10 @@
       entity_id: climate.thermostat_default_zone
       type: set_hvac_mode
       hvac_mode: heat
-    - service: climate.set_temperature
-      data:
-        temperature: 72
-      target:
-        device_id: aac434085c0b0d42b53f850c49d27fc7
     - service: notify.pushover
       data:
         message: >-
-          The thermostat has been changed to heat to 72°F based
+          The thermostat has been changed to heat mode based
           on the 12-hour forecast temperature.
         title: Therostat changed to heat mode
         data:
@@ -87,16 +77,10 @@
       entity_id: climate.thermostat_default_zone
       type: set_hvac_mode
       hvac_mode: auto
-    - service: climate.set_temperature
-      data:
-        target_temp_high: 74
-        target_temp_low: 71
-      target:
-        device_id: aac434085c0b0d42b53f850c49d27fc7
     - service: notify.pushover
       data:
         message: >-
-          The thermostat has been changed to heat to 71°F and cool to 74°F based
+          The thermostat has been changed to heat/cool mode based
           on the 12-hour forecast temperature.
         title: Therostat changed to heat/cool mode
         data:
