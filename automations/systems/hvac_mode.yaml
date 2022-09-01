@@ -24,7 +24,7 @@
         temperature: 74
         hvac_mode: cool
       target:
-        entity_id: climate.thermostat_default_zone
+        device_id: aac434085c0b0d42b53f850c49d27fc7
     - service: notify.pushover
       data:
         message: >-
@@ -59,7 +59,7 @@
         temperature: 72
         hvac_mode: heat
       target:
-        entity_id: climate.thermostat_default_zone
+        device_id: aac434085c0b0d42b53f850c49d27fc7
     - service: notify.pushover
       data:
         message: >-
@@ -95,7 +95,7 @@
         target_temp_low: 71
         hvac_mode: auto
       target:
-        entity_id: climate.thermostat_default_zone
+        device_id: aac434085c0b0d42b53f850c49d27fc7
     - service: notify.pushover
       data:
         message: >-
