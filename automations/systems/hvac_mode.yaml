@@ -19,11 +19,17 @@
       entity_id: climate.thermostat_default_zone
       type: set_hvac_mode
       hvac_mode: cool
+    - service: switch.turn_off
+      data: {}
+      target:
+        entity_id: switch.thermostat_default_zone_hold
     - service: notify.pushover
       data:
         message: >-
-          The thermostat has been changed to cool mode based
-          on the 12-hour forecast temperature.
+          The thermostat has been changed to cool mode because the 24-hour
+          forecast low temperature
+          ({{ states("sensor.openweathermap_24_hour_min_forecast_temperature") }}°F)
+          is above 60°F.
         title: Therostat changed to cool mode
         data:
           priority: -1
@@ -48,11 +54,17 @@
       entity_id: climate.thermostat_default_zone
       type: set_hvac_mode
       hvac_mode: heat
+    - service: switch.turn_off
+      data: {}
+      target:
+        entity_id: switch.thermostat_default_zone_hold
     - service: notify.pushover
       data:
         message: >-
-          The thermostat has been changed to heat mode based
-          on the 12-hour forecast temperature.
+          The thermostat has been changed to heat mode because the 24-hour
+          forecast high temperature
+          ({{ states("sensor.openweathermap_24_hour_max_forecast_temperature") }}°F)
+          is below 60°F.
         title: Therostat changed to heat mode
         data:
           priority: -1
@@ -77,11 +89,17 @@
       entity_id: climate.thermostat_default_zone
       type: set_hvac_mode
       hvac_mode: auto
+    - service: switch.turn_off
+      data: {}
+      target:
+        entity_id: switch.thermostat_default_zone_hold
     - service: notify.pushover
       data:
         message: >-
-          The thermostat has been changed to heat/cool mode based
-          on the 12-hour forecast temperature.
+          The thermostat has been changed to heat mode based on the 24-hour
+          forecast low and high temperatures
+          ({{ states("sensor.openweathermap_24_hour_min_forecast_temperature") }}°F -
+          ({{ states("sensor.openweathermap_24_hour_max_forecast_temperature") }}°F).
         title: Therostat changed to heat/cool mode
         data:
           priority: -1
