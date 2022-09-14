@@ -99,7 +99,7 @@
           The thermostat has been changed to heat mode based on the 24-hour
           forecast low and high temperatures
           ({{ states("sensor.openweathermap_24_hour_min_forecast_temperature") }}°F -
-          ({{ states("sensor.openweathermap_24_hour_max_forecast_temperature") }}°F).
+          {{ states("sensor.openweathermap_24_hour_max_forecast_temperature") }}°F).
         title: Therostat changed to heat/cool mode
         data:
           priority: -1
