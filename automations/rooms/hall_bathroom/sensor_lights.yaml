@@ -43,6 +43,10 @@
       entity_id: switch.hall_bathroom_exhaust_fan
       domain: switch
   action:
+    - service: input_boolean.turn_off
+      data: {}
+      target:
+        entity_id: input_boolean.arm_hall_bathroom_vanity_lights_off
     - service: switch.turn_off
       target:
         device_id: b0e0ba30fd12749539a97ecbcbe13666

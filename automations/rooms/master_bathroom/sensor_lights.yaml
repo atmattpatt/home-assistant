@@ -43,6 +43,10 @@
       entity_id: switch.master_bathroom_exhaust_fan
       domain: switch
   action:
+    - service: input_boolean.turn_off
+      data: {}
+      target:
+        entity_id: input_boolean.arm_master_bathroom_vanity_lights_off
     - service: light.turn_off
       data:
         transition: 30
