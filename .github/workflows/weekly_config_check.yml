@@ -1,7 +1,6 @@
 ---
-name: Home Assistant
+name: Weekly Configuration Check
 on:
-  push:
   schedule:
     - cron: "0 6 * * 0"
 jobs:
