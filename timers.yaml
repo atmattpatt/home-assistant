@@ -29,12 +29,6 @@ master_bathroom_exhaust_fan:
   icon: "mdi:fan-auto"
   restore: true
 
-master_bedroom_closet_lights:
-  name: Master Bedroom Closet Lights Timer
-  duration: "00:05:00"
-  icon: "mdi:lightbulb-auto"
-  restore: true
-
 office_closet_lights:
   name: Office Closet Lights Timer
   duration: "00:05:00"
