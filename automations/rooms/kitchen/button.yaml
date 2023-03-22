@@ -1,0 +1,106 @@
+---
+- id: '1676924059042'
+  alias: Turn on Kitchen Main Lights from Button
+  trigger:
+  - platform: device
+    device_id: f2d334465c6af04a0dd2a8a99b188e69
+    domain: homekit_controller
+    type: button1
+    subtype: single_press
+  condition:
+  - condition: device
+    type: is_off
+    device_id: 3e02c0570d28f44af20c39f9c455aba8
+    entity_id: light.kitchen_main_lights
+    domain: light
+  action:
+  - type: turn_on
+    device_id: 3e02c0570d28f44af20c39f9c455aba8
+    entity_id: light.kitchen_main_lights
+    domain: light
+  mode: single
+
+- id: '1676924139711'
+  alias: Turn on All Kitchen Lights from Button
+  trigger:
+  - platform: device
+    device_id: f2d334465c6af04a0dd2a8a99b188e69
+    domain: homekit_controller
+    type: button1
+    subtype: double_press
+  action:
+  - type: turn_on
+    device_id: 3e02c0570d28f44af20c39f9c455aba8
+    entity_id: light.kitchen_main_lights
+    domain: light
+  - type: turn_on
+    device_id: d7054e50760012e9ac35099d01e98d2a
+    entity_id: light.kitchen_under_cabinet
+    domain: light
+  - type: turn_on
+    device_id: fa4030966244ef0b3d80e3efa11e4899
+    entity_id: light.kitchen_island_pendants
+    domain: light
+  mode: single
+
+- id: '1676924271515'
+  alias: Activate Dining Scene from Button
+  trigger:
+  - platform: device
+    device_id: f2d334465c6af04a0dd2a8a99b188e69
+    domain: homekit_controller
+    type: button1
+    subtype: long_press
+  condition:
+  - condition: device
+    type: is_off
+    device_id: 68736195bfe19112c6ad8413c9ccd2df
+    entity_id: light.dining_room_chandelier
+    domain: light
+  action:
+  - service: scene.turn_on
+    target:
+      entity_id: scene.dining
+  mode: single
+
+- id: '1676924345359'
+  alias: Turn off Kitchen Main Lights from Button
+  trigger:
+  - platform: device
+    device_id: f2d334465c6af04a0dd2a8a99b188e69
+    domain: homekit_controller
+    type: button1
+    subtype: single_press
+  condition:
+  - condition: device
+    type: is_on
+    device_id: 3e02c0570d28f44af20c39f9c455aba8
+    entity_id: light.kitchen_main_lights
+    domain: light
+  action:
+  - type: turn_off
+    device_id: 3e02c0570d28f44af20c39f9c455aba8
+    entity_id: light.kitchen_main_lights
+    domain: light
+  mode: single
+
+- id: '1676924491661'
+  alias: Turn off Dining Room Chandelier from Button
+  trigger:
+  - platform: device
+    device_id: f2d334465c6af04a0dd2a8a99b188e69
+    domain: homekit_controller
+    type: button1
+    subtype: long_press
+  condition:
+  - condition: device
+    type: is_on
+    device_id: 68736195bfe19112c6ad8413c9ccd2df
+    entity_id: light.dining_room_chandelier
+    domain: light
+  action:
+  - type: turn_off
+    device_id: 68736195bfe19112c6ad8413c9ccd2df
+    entity_id: light.dining_room_chandelier
+    domain: light
+  mode: single
