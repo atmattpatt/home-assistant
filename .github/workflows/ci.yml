@@ -1,5 +1,5 @@
 ---
-name: Home Assistant
+name: Lint and Format
 on: [push]
 jobs:
   lint:
