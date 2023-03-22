@@ -43,14 +43,18 @@
       entity_id: switch.master_bathroom_exhaust_fan
       domain: switch
   action:
-    - type: turn_off
-      device_id: 078119b57353b27a00f316a599c90979
-      entity_id: switch.master_bathroom_exhaust_fan_light
-      domain: switch
-    - type: turn_off
-      device_id: fab9a7237fb1501e3bd5a6e6f4a6fa1a
-      entity_id: light.master_bathroom_vanity_lights
-      domain: light
+    - service: input_boolean.turn_off
+      data: {}
+      target:
+        entity_id: input_boolean.arm_master_bathroom_vanity_lights_off
+    - service: light.turn_off
+      data:
+        transition: 30
+      target:
+        device_id: fab9a7237fb1501e3bd5a6e6f4a6fa1a
+    - service: switch.turn_off
+      target:
+        device_id: 078119b57353b27a00f316a599c90979
 
 - id: turn_off_master_bathroom_vanity_lights_with_main_lights_80812cda
   alias: Turn off Master Bathroom Vanity Lights with Main Lights
