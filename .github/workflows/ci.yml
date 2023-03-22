@@ -21,7 +21,7 @@ jobs:
         with:
           ref: ${{ github.head_ref }}
       - name: Format YAML files
-        uses: creyD/prettier_action@v4.2
+        uses: creyD/prettier_action@v4.3
         with:
           prettier_options: "--write ./**/*.{yaml,yml}"
           commit_message: "Format YAML code"
