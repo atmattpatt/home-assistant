@@ -43,14 +43,14 @@
       entity_id: switch.hall_bathroom_exhaust_fan
       domain: switch
   action:
+    - service: switch.turn_off
+      target:
+        device_id: b0e0ba30fd12749539a97ecbcbe13666
     - service: light.turn_off
       data:
         transition: 30
       target:
         device_id: 28a03ac1f3a361fcfe6289258cc72ea9
-    - service: light.turn_off
-      target:
-        device_id: b0e0ba30fd12749539a97ecbcbe13666
 
 - id: turn_off_hall_bathroom_vanity_lights_with_main_lights_e4aa0145
   alias: Turn off Hall Bathroom Vanity Lights with Main Lights

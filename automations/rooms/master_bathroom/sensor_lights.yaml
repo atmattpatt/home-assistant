@@ -48,7 +48,7 @@
         transition: 30
       target:
         device_id: fab9a7237fb1501e3bd5a6e6f4a6fa1a
-    - service: light.turn_off
+    - service: switch.turn_off
       target:
         device_id: 078119b57353b27a00f316a599c90979
 
