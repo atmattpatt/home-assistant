@@ -7,7 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out configuration from GitHub
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: YAML Lint
         uses: ibiqlik/action-yamllint@v3
         with:
@@ -17,7 +17,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out configuration from GitHub
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           ref: ${{ github.head_ref }}
       - name: Format YAML files
