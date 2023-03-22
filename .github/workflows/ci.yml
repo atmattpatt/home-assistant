@@ -1,7 +1,22 @@
 ---
-name: Lint and Format
+name: Home Assistant
 on: [push]
 jobs:
+  check_config:
+    name: Core Configuration Check
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        tag: [stable, beta, dev]
+    steps:
+      - name: Check out configuration from GitHub
+        uses: actions/checkout@v3
+      - name: Run Home Assistant Configuration Check
+        uses: frenck/action-home-assistant@v1
+        with:
+          path: "./"
+          secrets: secrets.test.yaml
+          version: ${{ matrix.tag }}
   lint:
     name: YAML Lint
     runs-on: ubuntu-latest
