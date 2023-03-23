@@ -22,5 +22,8 @@ jobs:
         run: |
           puppet apply --modulepath="$GITHUB_WORKSPACE/modules" --verbose --show_diff manifests/site.pp
 
+      - name: Configuration check
+        run: docker exec home-assistant hass --config /config --script check_config
+
       - name: Restart home-assistant
         run: docker restart home-assistant
