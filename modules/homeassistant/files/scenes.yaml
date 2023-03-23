@@ -1,4 +1,5 @@
 ---
+# Managed by Puppet
 - id: dining_d85c641b
   name: Dining
   icon: mdi:silverware-fork-knife
