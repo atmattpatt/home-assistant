@@ -6,5 +6,6 @@ class homeassistant {
 
   include homeassistant::light_groups
   include homeassistant::scenes
+  include homeassistant::templates
   include homeassistant::timers
 }
