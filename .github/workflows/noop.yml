@@ -3,7 +3,7 @@ name: Puppet noop
 on:
   workflow_dispatch:
 jobs:
-  noop:
+  puppet-noop:
     runs-on: self-hosted
     steps:
       - name: Install Puppet

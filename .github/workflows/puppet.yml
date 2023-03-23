@@ -1,5 +1,5 @@
 ---
-name: Puppet noop
+name: Puppet apply
 on:
   workflow_dispatch:
 jobs:
