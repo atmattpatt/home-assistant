@@ -19,4 +19,4 @@ jobs:
 
       - name: Puppet noop
         run: |
-          puppet apply --modulepath="$GITHUB_WORKSPACE/modules" --noop manifests/site.pp
+          puppet apply --modulepath="$GITHUB_WORKSPACE/modules" --noop --test manifests/site.pp
