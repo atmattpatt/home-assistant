@@ -20,7 +20,7 @@ jobs:
 
       - name: Puppet apply
         run: |
-          puppet apply --modulepath="$GITHUB_WORKSPACE/modules" --verbose manifests/site.pp
+          puppet apply --modulepath="$GITHUB_WORKSPACE/modules" --verbose --show_diff manifests/site.pp
 
       - name: Restart home-assistant
         run: docker restart home-assistant

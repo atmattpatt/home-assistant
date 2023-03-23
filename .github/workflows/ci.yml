@@ -2,14 +2,14 @@
 name: Home Assistant
 on: [push]
 jobs:
-  check_config:
+  config-test:
     name: Core Configuration Check
     runs-on: ubuntu-latest
     strategy:
       matrix:
         tag: [stable, beta, dev]
     steps:
-      - name: Check out configuration from GitHub
+      - name: Check out code from GitHub
         uses: actions/checkout@v3
       - name: Run Home Assistant Configuration Check
         uses: frenck/action-home-assistant@v1
@@ -17,24 +17,19 @@ jobs:
           path: "./"
           secrets: secrets.test.yaml
           version: ${{ matrix.tag }}
-  lint:
+
+  yaml-lint:
     name: YAML Lint
     runs-on: ubuntu-latest
     steps:
-      - name: Check out configuration from GitHub
+      - name: Check out code from GitHub
         uses: actions/checkout@v3
+        with:
+          ref: ${{ github.head_ref }}
       - name: YAML Lint
         uses: ibiqlik/action-yamllint@v3
         with:
           file_or_dir: "."
-  format:
-    name: YAML Formatting
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out configuration from GitHub
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ github.head_ref }}
       - name: Format YAML files
         uses: creyD/prettier_action@v4.3
         with:
@@ -44,3 +39,34 @@ jobs:
             Performed by GitHub Actions
             action: creyD/prettier_action
             definition: .github/workflows/ci.yml
+
+  puppet-lint:
+    name: Puppet Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code from GitHub
+        uses: actions/checkout@v3
+      - name: Puppet Lint
+        uses: scottbrenner/puppet-lint-action@master
+        with:
+          args: "./"
+
+  puppet-noop:
+    name: Puppet noop
+    runs-on: self-hosted
+    needs: [yaml-lint, puppet-lint, config-test]
+    steps:
+      - name: Install Puppet
+        run: |
+          wget https://apt.puppet.com/puppet7-release-focal.deb
+          sudo dpkg -i puppet7-release-focal.deb
+          sudo apt-get update
+          sudo apt-get -y install puppet-agent
+          echo "/opt/puppetlabs/bin" >> $GITHUB_PATH
+
+      - name: Check out code from GitHub
+        uses: actions/checkout@v3
+
+      - name: Puppet noop
+        run: |
+          puppet apply --modulepath="$GITHUB_WORKSPACE/modules" --noop --test manifests/site.pp
