@@ -1,0 +1,7 @@
+---
+# Managed by Puppet
+- platform: time_date
+  display_options:
+    - "time"
+    - "date"
+    - "time_utc"
