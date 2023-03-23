@@ -1,0 +1,7 @@
+---
+# Managed by Puppet
+- platform: group
+  name: TV Lights
+  entities:
+    - light.hue_play_1
+    - light.hue_play_2
