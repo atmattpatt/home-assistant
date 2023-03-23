@@ -1,0 +1,23 @@
+---
+name: Puppet noop
+on:
+  workflow_dispatch:
+jobs:
+  puppet-apply:
+    runs-on: self-hosted
+    environment: production
+    steps:
+      - name: Install Puppet
+        run: |
+          wget https://apt.puppet.com/puppet7-release-focal.deb
+          sudo dpkg -i puppet7-release-focal.deb
+          sudo apt-get update
+          sudo apt-get -y install puppet-agent
+          echo "/opt/puppetlabs/bin" >> $GITHUB_PATH
+
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Puppet apply
+        run: |
+          puppet apply --modulepath="$GITHUB_WORKSPACE/modules" --verbose manifests/site.pp
