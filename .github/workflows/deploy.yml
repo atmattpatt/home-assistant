@@ -1,5 +1,5 @@
 ---
-name: Puppet apply
+name: Deploy
 on:
   workflow_dispatch:
 jobs:
@@ -15,7 +15,7 @@ jobs:
           sudo apt-get -y install puppet-agent
           echo "/opt/puppetlabs/bin" >> $GITHUB_PATH
 
-      - name: Checkout code
+      - name: Check out code from GitHub
         uses: actions/checkout@v3
 
       - name: Puppet apply
