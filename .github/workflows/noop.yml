@@ -1,9 +1,9 @@
 ---
-name: Deploy
+name: Puppet noop
 on:
   workflow_dispatch:
 jobs:
-  helloworld:
+  noop:
     runs-on: self-hosted
     steps:
       - name: Install Puppet
