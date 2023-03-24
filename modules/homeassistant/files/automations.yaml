@@ -1,0 +1,7 @@
+---
+# This file is managed by puppet but this source is unused. This file is here
+# to allow the config-test action to work in this directory.
+
+# On the homeassistant server, automations.yaml contains any automations that
+# were created through the UI. Puppet will not overwrite these. However, once
+# stables, these automations should be moved to Puppet-managed files.

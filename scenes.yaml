@@ -1,8 +1,0 @@
----
-- id: dining_d85c641b
-  name: Dining
-  icon: mdi:silverware-fork-knife
-  entities:
-    light.dining_room_chandelier:
-      state: "on"
-      brightness: 76

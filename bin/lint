@@ -3,4 +3,8 @@
 set -e
 set -o pipefail
 
-exec yamllint "$@" .
+echo ">> Linting YAML files"
+yamllint .
+
+echo ">> Linting Puppet files"
+bundle exec puppet-lint --no-documentation-check .

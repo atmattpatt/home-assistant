@@ -4,8 +4,12 @@ class homeassistant {
     source => 'puppet:///modules/homeassistant/configuration.yaml',
   }
 
-  file { '/homeassistant/config/scenes.yaml':
-    ensure => file,
-    source => 'puppet:///modules/homeassistant/scenes.yaml',
-  }
+  include homeassistant::automations
+  include homeassistant::binary_sensors
+  include homeassistant::inputs
+  include homeassistant::light_groups
+  include homeassistant::scenes
+  include homeassistant::sensors
+  include homeassistant::templates
+  include homeassistant::timers
 }

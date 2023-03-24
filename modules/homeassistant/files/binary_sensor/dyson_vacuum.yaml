@@ -1,0 +1,6 @@
+---
+# Managed by Puppet
+- name: "Dyson Vacuum Charging"
+  platform: threshold
+  entity_id: sensor.dyson_vacuum_test_current
+  upper: 0.2 # amps

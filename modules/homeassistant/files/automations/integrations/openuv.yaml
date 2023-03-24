@@ -1,0 +1,24 @@
+---
+# Managed by Puppet
+- id: update_openuv_data_e07a4339
+  alias: Update OpenUV data
+  trigger:
+    - platform: time_pattern
+      minutes: "/30"
+  condition:
+    - condition: and
+      conditions:
+        - condition: sun
+          after: sunrise
+          after_offset: "1:00:00"
+        - condition: sun
+          before: sunset
+          before_offset: "1:00:00"
+  action:
+    - service: homeassistant.update_entity
+      target:
+        entity_id: sensor.current_uv_index
+    - service: homeassistant.update_entity
+      target:
+        entity_id: binary_sensor.protection_window
+  mode: single

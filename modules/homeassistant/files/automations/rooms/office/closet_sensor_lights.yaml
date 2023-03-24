@@ -1,0 +1,57 @@
+---
+# Managed by Puppet
+- id: turn_on_office_closet_lights_d336b55e
+  alias: Turn on Office Closet lights when Door Opened
+  trigger:
+    - type: opened
+      platform: device
+      device_id: c2acd19b6eb339acc4f8bdfa4031949d
+      entity_id: binary_sensor.office_closet_door_sensor
+      domain: binary_sensor
+  condition: []
+  action:
+    - type: turn_on
+      device_id: c9b38898da4f2133c3b6cd06178990b7
+      entity_id: light.office_closet_light
+      domain: light
+    - service: timer.start
+      target:
+        entity_id: timer.office_closet_lights
+  mode: single
+
+- id: turn_off_office_closet_lights_5e7da815
+  alias: Turn off Office Closet lights when Door Closed
+  trigger:
+    - type: not_opened
+      platform: device
+      device_id: c2acd19b6eb339acc4f8bdfa4031949d
+      entity_id: binary_sensor.office_closet_door_sensor
+      domain: binary_sensor
+  condition: []
+  action:
+    - type: turn_off
+      device_id: c9b38898da4f2133c3b6cd06178990b7
+      entity_id: light.office_closet_light
+      domain: light
+    - service: timer.cancel
+      target:
+        entity_id: timer.office_closet_lights
+  mode: single
+
+- id: turn_off_office_closet_lights_48d0aee3
+  alias: Turn off Office Closet lights after 5 minutes
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.office_closet_lights
+  condition:
+    - condition: state
+      entity_id: light.office_closet_light
+      state: "on"
+  action:
+    - type: turn_off
+      device_id: c9b38898da4f2133c3b6cd06178990b7
+      entity_id: light.office_closet_light
+      domain: light
+  mode: single
