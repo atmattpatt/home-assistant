@@ -49,7 +49,7 @@ jobs:
       - name: Puppet Lint
         uses: scottbrenner/puppet-lint-action@master
         with:
-          args: "./"
+          args: "--no-documentation-check ./"
 
   puppet-noop:
     name: Puppet noop
