@@ -3,4 +3,5 @@
 set -e
 set -o pipefail
 
+echo ">> Formatting YAML files"
 exec prettier --write "$@" "./**/*.y{a,}ml"
