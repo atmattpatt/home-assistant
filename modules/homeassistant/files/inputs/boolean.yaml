@@ -1,0 +1,9 @@
+---
+# Managed by Puppet
+arm_hall_bathroom_vanity_lights_off:
+  name: Arm Hall Bathroom vanity lights to turn off with main lights
+  icon: mdi:toggle-switch-outline
+
+arm_master_bathroom_vanity_lights_off:
+  name: Arm Master Bathroom vanity lights to turn off with exhaust fan light
+  icon: mdi:toggle-switch-outline

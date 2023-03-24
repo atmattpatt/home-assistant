@@ -4,6 +4,7 @@ class homeassistant {
     source => 'puppet:///modules/homeassistant/configuration.yaml',
   }
 
+  include homeassistant::inputs
   include homeassistant::light_groups
   include homeassistant::scenes
   include homeassistant::sensors
