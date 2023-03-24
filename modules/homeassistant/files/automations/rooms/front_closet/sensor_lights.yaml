@@ -1,0 +1,57 @@
+---
+# Managed by Puppet
+- id: turn_on_front_closet_lights_2bbd9ff6
+  alias: Turn on Front Closet lights when Door Opened
+  trigger:
+    - type: opened
+      platform: device
+      device_id: d0b9db86d6679b43e60bd84a2e29031e
+      entity_id: binary_sensor.front_closet_door_sensor
+      domain: binary_sensor
+  condition: []
+  action:
+    - type: turn_on
+      device_id: 5cda0a23b069837548a5502301dc66d6
+      entity_id: switch.front_closet_main_lights
+      domain: switch
+    - service: timer.start
+      target:
+        entity_id: timer.front_closet_lights
+  mode: single
+
+- id: turn_off_front_closet_lights_f104db5e
+  alias: Turn off Front Closet lights when Door Closed
+  trigger:
+    - type: not_opened
+      platform: device
+      device_id: d0b9db86d6679b43e60bd84a2e29031e
+      entity_id: binary_sensor.front_closet_door_sensor
+      domain: binary_sensor
+  condition: []
+  action:
+    - type: turn_off
+      device_id: 5cda0a23b069837548a5502301dc66d6
+      entity_id: switch.front_closet_main_lights
+      domain: switch
+    - service: timer.cancel
+      target:
+        entity_id: timer.front_closet_lights
+  mode: single
+
+- id: turn_off_front_closet_lights_39211f55
+  alias: Turn off Front Closet lights after 5 minutes
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.front_closet_lights
+  condition:
+    - condition: state
+      entity_id: switch.front_closet_main_lights
+      state: "on"
+  action:
+    - type: turn_off
+      device_id: 5cda0a23b069837548a5502301dc66d6
+      entity_id: switch.front_closet_main_lights
+      domain: switch
+  mode: single

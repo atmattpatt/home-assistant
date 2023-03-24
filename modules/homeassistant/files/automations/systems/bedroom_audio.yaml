@@ -1,0 +1,94 @@
+---
+- id: "1676924781201"
+  alias: Play/Pause Yamaha Stereo Receiver from Pico Remote
+  trigger:
+    - platform: device
+      device_id: 36c1924edd38dd5db10caefc789f7ca6
+      domain: lutron_caseta
+      type: press
+      subtype: "on"
+  condition:
+    - condition: not
+      conditions:
+        - condition: device
+          device_id: 683f86ae9e101ebf03b3a824e968bcfb
+          domain: media_player
+          entity_id: media_player.r_n303_9726a4
+          type: is_off
+  action:
+    - service: media_player.media_play_pause
+      target:
+        entity_id: media_player.r_n303_9726a4
+  mode: single
+
+- id: "1676924867864"
+  alias: Skip Track on Yamaha Stereo Receiver from Pico Remote
+  trigger:
+    - platform: device
+      device_id: 36c1924edd38dd5db10caefc789f7ca6
+      domain: lutron_caseta
+      type: press
+      subtype: "off"
+  condition:
+    - condition: or
+      conditions:
+        - condition: device
+          device_id: 683f86ae9e101ebf03b3a824e968bcfb
+          domain: media_player
+          entity_id: media_player.r_n303_9726a4
+          type: is_playing
+        - condition: device
+          device_id: 683f86ae9e101ebf03b3a824e968bcfb
+          domain: media_player
+          entity_id: media_player.r_n303_9726a4
+          type: is_paused
+        - condition: device
+          device_id: 683f86ae9e101ebf03b3a824e968bcfb
+          domain: media_player
+          entity_id: media_player.r_n303_9726a4
+          type: is_buffering
+  action:
+    - service: media_player.media_next_track
+      target:
+        entity_id: media_player.r_n303_9726a4
+  mode: single
+
+- id: "1676924951475"
+  alias: Increase Yamaha Stereo Receiver Volume from Pico Remote
+  trigger:
+    - platform: device
+      device_id: 36c1924edd38dd5db10caefc789f7ca6
+      domain: lutron_caseta
+      type: press
+      subtype: raise
+  condition:
+    - condition: device
+      device_id: 683f86ae9e101ebf03b3a824e968bcfb
+      domain: media_player
+      entity_id: media_player.r_n303_9726a4
+      type: is_playing
+  action:
+    - service: media_player.volume_up
+      target:
+        entity_id: media_player.r_n303_9726a4
+  mode: single
+
+- id: "1676924984596"
+  alias: Decrease Yamaha Stereo Receiver Volume from Pico Remote
+  trigger:
+    - platform: device
+      device_id: 36c1924edd38dd5db10caefc789f7ca6
+      domain: lutron_caseta
+      type: press
+      subtype: lower
+  condition:
+    - condition: device
+      device_id: 683f86ae9e101ebf03b3a824e968bcfb
+      domain: media_player
+      entity_id: media_player.r_n303_9726a4
+      type: is_playing
+  action:
+    - service: media_player.volume_down
+      target:
+        entity_id: media_player.r_n303_9726a4
+  mode: single

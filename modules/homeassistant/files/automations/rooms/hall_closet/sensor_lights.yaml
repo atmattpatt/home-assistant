@@ -1,0 +1,57 @@
+---
+# Managed by Puppet
+- id: turn_on_hall_closet_lights_e47d312e
+  alias: Turn on Hall Closet lights when Door Opened
+  trigger:
+    - type: opened
+      platform: device
+      device_id: b5c1601aef2e9bcfdc7c9cb09603b4b1
+      entity_id: binary_sensor.hall_closet_door_sensor
+      domain: binary_sensor
+  condition: []
+  action:
+    - type: turn_on
+      device_id: 755f6de8011b81d79cc584f8d456dffc
+      entity_id: switch.hall_closet_main_lights
+      domain: switch
+    - service: timer.start
+      target:
+        entity_id: timer.hall_closet_lights
+  mode: single
+
+- id: turn_off_hall_closet_lights_16ae92e6
+  alias: Turn off Hall Closet lights when Door Closed
+  trigger:
+    - type: not_opened
+      platform: device
+      device_id: b5c1601aef2e9bcfdc7c9cb09603b4b1
+      entity_id: binary_sensor.hall_closet_door_sensor
+      domain: binary_sensor
+  condition: []
+  action:
+    - type: turn_off
+      device_id: 755f6de8011b81d79cc584f8d456dffc
+      entity_id: switch.hall_closet_main_lights
+      domain: switch
+    - service: timer.cancel
+      target:
+        entity_id: timer.hall_closet_lights
+  mode: single
+
+- id: turn_off_hall_closet_lights_87b2187b
+  alias: Turn off Hall Closet lights after 5 minutes
+  trigger:
+    - platform: event
+      event_type: timer.finished
+      event_data:
+        entity_id: timer.hall_closet_lights
+  condition:
+    - condition: state
+      entity_id: switch.hall_closet_main_lights
+      state: "on"
+  action:
+    - type: turn_off
+      device_id: 755f6de8011b81d79cc584f8d456dffc
+      entity_id: switch.hall_closet_main_lights
+      domain: switch
+  mode: single
