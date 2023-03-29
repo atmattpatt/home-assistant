@@ -16,6 +16,6 @@ jobs:
       - name: Run Home Assistant Configuration Check
         uses: frenck/action-home-assistant@v1
         with:
-          path: "./"
+          path: "modules/homeassistant/files/"
           secrets: secrets.test.yaml
           version: ${{ matrix.tag }}
