@@ -19,10 +19,6 @@
       entity_id: climate.thermostat_default_zone
       type: set_hvac_mode
       hvac_mode: cool
-    - service: switch.turn_off
-      data: {}
-      target:
-        entity_id: switch.thermostat_default_zone_hold
     - service: notify.pushover
       data:
         message: >-
@@ -54,10 +50,6 @@
       entity_id: climate.thermostat_default_zone
       type: set_hvac_mode
       hvac_mode: heat
-    - service: switch.turn_off
-      data: {}
-      target:
-        entity_id: switch.thermostat_default_zone_hold
     - service: notify.pushover
       data:
         message: >-
@@ -89,10 +81,6 @@
       entity_id: climate.thermostat_default_zone
       type: set_hvac_mode
       hvac_mode: auto
-    - service: switch.turn_off
-      data: {}
-      target:
-        entity_id: switch.thermostat_default_zone_hold
     - service: notify.pushover
       data:
         message: >-
