@@ -6,8 +6,21 @@
     - platform: state
       entity_id:
         - sensor.hvac_desired_operating_mode
+      from: heat
       to: cool
+    - platform: state
+      entity_id:
+        - sensor.hvac_desired_operating_mode
+      from: heat_cool
+      to: cool
+    - platform: state
+      entity_id:
+        - input_boolean.humidifier_bypass_open
+      to: "off"
   condition:
+    - condition: state
+      entity_id: sensor.hvac_desired_operating_mode
+      state: cool
     - condition: not
       conditions:
         - condition: state
@@ -19,20 +32,34 @@
       entity_id: climate.thermostat_default_zone
       type: set_hvac_mode
       hvac_mode: cool
-    - service: switch.turn_off
-      data: {}
-      target:
-        entity_id: switch.thermostat_default_zone_hold
-    - service: notify.pushover
-      data:
-        message: >-
-          The thermostat has been changed to cool mode because the 24-hour
-          forecast low temperature
-          ({{ states("sensor.openweathermap_24_hour_min_forecast_temperature") }}°F)
-          is above 60°F.
-        title: Therostat changed to cool mode
-        data:
-          priority: -1
+    - if:
+        - condition: state
+          entity_id: input_boolean.humidifier_bypass_open
+          state: "on"
+      then:
+        - service: notify.pushover
+          data:
+            message: >-
+              The thermostat would have been changed to cool mode because the 24-hour
+              forecast low temperature
+              ({{ states("sensor.openweathermap_24_hour_min_forecast_temperature") }}°F)
+              is above 60°F, but the humidifier bypass is open. Please close the
+              humidifier bypass and update the <b>humidifier_bypass_open</b> entity.
+            title: Thermostat mode could not be updated
+            data:
+              url: https://hass.mattpatt.net/config/helpers/
+              url_title: Manage Helpers in Home Assistant
+      else:
+        - service: notify.pushover
+          data:
+            message: >-
+              The thermostat has been changed to cool mode because the 24-hour
+              forecast low temperature
+              ({{ states("sensor.openweathermap_24_hour_min_forecast_temperature") }}°F)
+              is above 60°F.
+            title: Thermostat changed to cool mode
+            data:
+              priority: -1
 
 - id: set_hvac_mode_heat_5bc2fc24
   alias: Set HVAC to heat mode
@@ -41,6 +68,12 @@
     - platform: state
       entity_id:
         - sensor.hvac_desired_operating_mode
+      from: cool
+      to: heat
+    - platform: state
+      entity_id:
+        - sensor.hvac_desired_operating_mode
+      from: heat_cool
       to: heat
   condition:
     - condition: not
@@ -54,10 +87,6 @@
       entity_id: climate.thermostat_default_zone
       type: set_hvac_mode
       hvac_mode: heat
-    - service: switch.turn_off
-      data: {}
-      target:
-        entity_id: switch.thermostat_default_zone_hold
     - service: notify.pushover
       data:
         message: >-
@@ -65,9 +94,14 @@
           forecast high temperature
           ({{ states("sensor.openweathermap_24_hour_max_forecast_temperature") }}°F)
           is below 60°F.
-        title: Therostat changed to heat mode
+
+          If humidity is required, don't forget to open the humidifier bypass and
+          update the <b>humidifier_bypass_open</b> helper.
+        title: Thermostat changed to heat mode
         data:
           priority: -1
+          url: https://hass.mattpatt.net/config/helpers/
+          url_title: Manage Helpers in Home Assistant
 
 - id: set_hvac_mode_heat_cool_0a107423
   alias: Set HVAC to heat/cool mode
@@ -76,8 +110,21 @@
     - platform: state
       entity_id:
         - sensor.hvac_desired_operating_mode
+      from: heat
       to: heat_cool
+    - platform: state
+      entity_id:
+        - sensor.hvac_desired_operating_mode
+      from: cool
+      to: heat_cool
+    - platform: state
+      entity_id:
+        - input_boolean.humidifier_bypass_open
+      to: "off"
   condition:
+    - condition: state
+      entity_id: sensor.hvac_desired_operating_mode
+      state: heat_cool
     - condition: not
       conditions:
         - condition: state
@@ -89,17 +136,32 @@
       entity_id: climate.thermostat_default_zone
       type: set_hvac_mode
       hvac_mode: auto
-    - service: switch.turn_off
-      data: {}
-      target:
-        entity_id: switch.thermostat_default_zone_hold
-    - service: notify.pushover
-      data:
-        message: >-
-          The thermostat has been changed to heat/cool mode based on the 24-hour
-          forecast low and high temperatures
-          ({{ states("sensor.openweathermap_24_hour_min_forecast_temperature") }}°F -
-          {{ states("sensor.openweathermap_24_hour_max_forecast_temperature") }}°F).
-        title: Therostat changed to heat/cool mode
-        data:
-          priority: -1
+    - if:
+        - condition: state
+          entity_id: input_boolean.humidifier_bypass_open
+          state: "on"
+      then:
+        - service: notify.pushover
+          data:
+            message: >-
+              The thermostat would have been changed to heat/cool mode based on the 24-hour
+              forecast low and high temperatures
+              ({{ states("sensor.openweathermap_24_hour_min_forecast_temperature") }}°F -
+              {{ states("sensor.openweathermap_24_hour_max_forecast_temperature") }}°F),
+              but the humidifier bypass is open. Please close the humidifier bypass and
+              update the <b>humidifier_bypass_open</b> entity.
+            title: Thermostat mode could not be updated
+            data:
+              url: https://hass.mattpatt.net/config/helpers/
+              url_title: Manage Helpers in Home Assistant
+      else:
+        - service: notify.pushover
+          data:
+            message: >-
+              The thermostat has been changed to heat/cool mode based on the 24-hour
+              forecast low and high temperatures
+              ({{ states("sensor.openweathermap_24_hour_min_forecast_temperature") }}°F -
+              {{ states("sensor.openweathermap_24_hour_max_forecast_temperature") }}°F).
+            title: Thermostat changed to heat/cool mode
+            data:
+              priority: -1
