@@ -7,3 +7,7 @@ arm_hall_bathroom_vanity_lights_off:
 arm_master_bathroom_vanity_lights_off:
   name: Arm Master Bathroom vanity lights to turn off with exhaust fan light
   icon: mdi:toggle-switch-outline
+
+humidifier_bypass_open:
+  name: Humidifier Bypass Open
+  icon: mdi:air-humidifier
